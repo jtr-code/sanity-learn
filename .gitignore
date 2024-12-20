@@ -1,0 +1,44 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+nextjs-astral-grid/node_modules
+studio-astral-grid/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+nextjs-astral-grid/.next/
+/out/
+
+# production
+nextjs-astral-grid/build
+studio-astral-grid/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+nextjs-astral-grid/.env*
+studio-astral-grid/.env*
+
+# vercel
+.vercel
+
+# typescript
+nextjs-astral-grid/*.tsbuildinfo
+nextjs-astral-grid/next-env.d.ts
