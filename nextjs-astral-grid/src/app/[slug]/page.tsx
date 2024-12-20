@@ -20,6 +20,8 @@ export default async function PostPage({
   params: { slug: string };
 }) {
 
+  console.log("need to be merged")
+
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
   const postImageUrl = post.image
     ? urlFor(post.image)?.width(550).height(310).url()
