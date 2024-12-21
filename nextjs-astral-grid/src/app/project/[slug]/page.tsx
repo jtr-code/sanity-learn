@@ -5,14 +5,18 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-// Define the project details interface
+// Define proper page params type
+type Props = {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
 interface ProjectDetails {
   solution?: string;
   challenge?: string;
   results?: string;
 }
 
-// Define the project interface
 interface Project {
   _type: string;
   title: string;
@@ -20,7 +24,7 @@ interface Project {
   role: string;
   projectDate: string;
   mainImage?: SanityImageSource;
-  body: any[]; // Make this more specific if needed
+  body: any[];
   projectDetails?: ProjectDetails;
   slug: {
     current: string;
@@ -35,12 +39,10 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-// Generate metadata
-export async function generateMetadata({
-  params
-}: {
-  params: { slug: string }
-}): Promise<Metadata> {
+// Update metadata function with proper Props type
+export async function generateMetadata(
+  { params }: Props
+): Promise<Metadata> {
   const project = await client.fetch<Project>(PROJECT_QUERY, { slug: params.slug });
 
   return {
@@ -48,11 +50,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectDetailsPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+// Update page component with proper Props type
+export default async function ProjectDetailsPage({ params, searchParams }: Props) {
   const { slug } = params;
 
   const project = await client.fetch<Project>(PROJECT_QUERY, { slug });
@@ -125,8 +124,8 @@ export default async function ProjectDetailsPage({
   );
 }
 
-// Optionally, add generateStaticParams for static generation
-export async function generateStaticParams() {
+// Update generateStaticParams with proper return type
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const projects = await client.fetch<Project[]>(
     `*[_type == "project"]{ slug }`
   );
