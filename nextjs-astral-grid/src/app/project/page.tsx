@@ -74,11 +74,6 @@ const ProjectCards = () => {
               className={styles.image}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
-            <div className={styles.overlay}>
-              <Link href={`/project/${project.slug.current}`} className={styles.caseButton}>
-                SEE CASE
-              </Link>
-            </div>
           </div>
           <div className={styles.content}>
             <h3 className={styles.title}>{project.title}</h3>
